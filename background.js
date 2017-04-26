@@ -1,0 +1,290 @@
+var opt = { 
+	"new_open_below": false, "pin_list_multi_row": false, "close_with_MMB": true,
+	"always_show_close": false, "allow_pin_close": false,
+	"append_child_tab": "bottom", "append_child_tab_after_limit": "after",
+	"append_orphan_tab": "bottom", "close_other_trees": false,
+	"promote_children": true, "open_tree_on_hover": true, "max_tree_depth": -1
+};
+var opt_toolbar = {
+	"active_toolbar_tool": "", "filter_type": "url"
+};
+
+var	hold = true,
+	started = false,
+	schedule_save = 0,
+
+	tabs = {},
+
+	dt = {tabsIds: [], DropAfter: true, DropToTabId: 0, DropToIndex: 0, CameFromWindowId: 0, DroppedToWindowId: 0},
+	
+	caption_clear_filter = chrome.i18n.getMessage("caption_clear_filter"),
+	caption_loading = chrome.i18n.getMessage("caption_loading"),
+	caption_searchbox = chrome.i18n.getMessage("caption_searchbox");
+	
+function Start(){
+	started = true;
+
+	/* open options to set defaults */
+	if (localStorage.getItem("themeDefault") === null){
+		chrome.tabs.create({url: "options.html" });
+	}
+
+	/* all variables needed to load data */
+	var	loaded_options = {}, loaded_opt_toolbar = {}/* , loaded_toolbar = {} */;
+	
+	/* set loaded options */
+	if (localStorage.getItem("current_options") !== null){
+		loaded_options = JSON.parse(localStorage["current_options"]);
+	}
+	for (var parameter in opt) {
+		if (loaded_options[parameter] != undefined && opt[parameter] != undefined){
+			opt[parameter] = loaded_options[parameter];
+		}
+	}
+
+	/* toolbar options */
+	if (localStorage.getItem("current_toolbar_options") !== null){
+		loaded_opt_toolbar = JSON.parse(localStorage["current_toolbar_options"]);
+	}
+	for (var parameter in opt_toolbar) {
+		if (loaded_opt_toolbar[parameter] != undefined && opt_toolbar[parameter] != undefined){
+			opt_toolbar[parameter] = loaded_opt_toolbar[parameter];
+		}
+	}
+
+
+	LoadTabs(0);
+}	
+	
+	
+	
+function LoadTabs(retry){
+	chrome.tabs.query({windowType: "normal"}, function(qtabs){
+		
+		if (navigator.userAgent.match("Firefox") !== null && qtabs.length == 1 && qtabs[0].url.match("sessionrestore")){
+		// if (navigator.userAgent.match("Firefox") !== null && qtabs.length == 1){
+			setTimeout(function(){
+				LoadTabs(retry);
+			}, 2000);
+			return;
+		}
+
+		/* create current tabs object */
+		qtabs.forEach(function(Tab){
+			HashTab(Tab);
+		});
+		
+		var reference_tabs = {};
+		var tabs_matched = 0;
+		
+		qtabs.forEach(function(Tab){
+			for (var t = 0; t < 9999; t++){
+				if (localStorage.getItem("t"+t) !== null){
+					var LoadedTab = JSON.parse(localStorage["t"+t]);
+					if (LoadedTab[1] === tabs[Tab.id].h && reference_tabs[LoadedTab[0]] == undefined){
+						reference_tabs[LoadedTab[0]] = Tab.id;
+						tabs[Tab.id].p = LoadedTab[2];
+						tabs[Tab.id].n = LoadedTab[3];
+						tabs[Tab.id].o = LoadedTab[4];
+						tabs_matched++;
+						break;
+					}
+					
+				} else {
+					break;
+				}
+
+			}
+		});
+		
+		for (var tabId in tabs){
+			if (reference_tabs[tabs[tabId].p] != undefined){
+				tabs[tabId].p = reference_tabs[tabs[tabId].p];
+			}
+		}
+
+
+		/* will try to find tabs for 3 times */
+		if ((tabs_matched > qtabs.length*0.25) || retry > 3 || localStorage.getItem("t0") === null){
+			hold = false;
+			StartChromeListeners();
+			PeriodicCheck();
+			AutoSaveData(0);
+		} else {
+			setTimeout(function(){
+				LoadTabs(retry+1);
+			}, 3000);
+		}
+	});
+}
+	
+function PeriodicCheck(){
+	setTimeout(function(){
+		PeriodicCheck();
+		if (!hold){
+			chrome.tabs.query({windowType: "normal"}, function(qtabs){
+				qtabs.forEach(function(Tab){
+					if (tabs[Tab.id] == undefined){
+						HashTab(Tab);
+					}
+				});
+			});
+		}
+	},150000);
+}
+
+function AutoSaveData(tick){
+	setTimeout(function(){
+		AutoSaveData(tick+1);
+		if (schedule_save > 0){
+			schedule_save = 1;
+		}
+		if (!hold && schedule_save > 0 && Object.keys(tabs).length > 0){
+			chrome.tabs.query({windowType: "normal"}, function(qtabs){
+				for (var t = 0; t < qtabs.length; t++){
+					if (tabs[qtabs[t].id] != undefined && tabs[qtabs[t].id].h != undefined && tabs[qtabs[t].id].p != undefined && tabs[qtabs[t].id].n != undefined && tabs[qtabs[t].id].o != undefined){
+						var Tab = JSON.stringify([qtabs[t].id, tabs[qtabs[t].id].h, tabs[qtabs[t].id].p, tabs[qtabs[t].id].n, tabs[qtabs[t].id].o]);
+						if (localStorage.getItem("t"+t) == null || localStorage["t"+t] !== Tab){
+							localStorage["t"+t] = Tab;
+						}
+					}
+				}
+				schedule_save--;
+			});
+		}
+	}, 2000);
+}
+
+function SaveOptions(){
+	localStorage["current_options"] = JSON.stringify(opt);
+	localStorage["current_toolbar"] = JSON.stringify(toolbar);
+}
+function ResetOptions(){
+	if (localStorage.getItem("current_options") !== null){
+		localStorage.removeItem("current_options");
+	}
+	window.location.reload();
+}
+function ResetToolbar(){
+	if (localStorage.getItem("current_toolbar") !== null){
+		localStorage.removeItem("current_toolbar");
+	}
+	if (localStorage.getItem("current_toolbar_options") !== null){
+		localStorage.removeItem("current_toolbar_options");
+	}
+	window.location.reload();
+}
+function SaveToolbarOptions(){
+	localStorage["current_toolbar_options"] = JSON.stringify(opt_toolbar);
+}
+
+function HashTab(tab){
+	if (tabs[tab.id] == undefined){
+		tabs[tab.id] = {h: 0, p: tab.pinned ? 'pin_list' : 'tab_list', n: tab.index, o: 'n'};
+	}
+	var hash = 0;
+	if (tab.url.length === 0){
+		return 0;
+	}
+	for (var i = 0; i < tab.url.length; i++){
+		hash = (hash << 5)-hash;
+		hash = hash+tab.url.charCodeAt(i);
+		hash |= 0;
+	}
+	tabs[tab.id].h = hash;
+}
+
+function StartChromeListeners(){
+	chrome.tabs.onCreated.addListener(function(tab){
+		HashTab(tab);
+		chrome.runtime.sendMessage({command: "tab_created", windowId: tab.windowId, tab: tab, tabId: tab.id});
+		schedule_save++;
+	});
+	chrome.tabs.onAttached.addListener(function(tabId, attachInfo){
+		chrome.tabs.get(tabId, function(tab){
+			if (tabs[tabId] == undefined){ HashTab(tab); }
+			chrome.runtime.sendMessage({command: "tab_attached", windowId: attachInfo.newWindowId, tab: tab, tabId: tabId});
+		});
+		schedule_save++;
+	});
+	chrome.tabs.onRemoved.addListener(function(tabId, removeInfo){
+		chrome.runtime.sendMessage({command: "tab_removed", windowId: removeInfo.windowId, tabId: tabId});
+		delete tabs[tabId];
+		schedule_save++;
+	});
+	chrome.tabs.onDetached.addListener(function(tabId, detachInfo){
+		if (tabs[tabId] == undefined){ HashTab(tab); }
+		chrome.runtime.sendMessage({command: "tab_removed", windowId: detachInfo.oldWindowId, tabId: tabId});
+		schedule_save++;
+	});
+	chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
+		if (tabs[tabId] == undefined || changeInfo.url != undefined){ HashTab(tab); }
+		if (changeInfo.pinned == true){ tabs[tabId].p = 'pin_list'; }
+		if (changeInfo.pinned == false){ tabs[tabId].p = 'tab_list'; }
+		chrome.runtime.sendMessage({command: "tab_updated", windowId: tab.windowId, tab: tab, tabId: tabId, changeInfo: changeInfo});
+		if (changeInfo.url != undefined || changeInfo.pinned != undefined){schedule_save++;}
+	});
+	chrome.tabs.onMoved.addListener(function(tabId, moveInfo){
+		if (tabs[tabId] == undefined){ HashTab(tab); }
+		chrome.runtime.sendMessage({command: "tab_moved", windowId: moveInfo.windowId, tabId: tabId, moveInfo: moveInfo});
+		schedule_save++;
+	});
+	chrome.tabs.onReplaced.addListener(function(addedTabId, removedTabId){
+		chrome.tabs.get(addedTabId, function(tab){
+			if (addedTabId == removedTabId){
+				chrome.runtime.sendMessage({command: "tab_updated", windowId: tab.windowId, tab: tab, tabId: tab.id, changeInfo: {status: tab.status, url: tab.url, title: tab.title, audible: tab.audible, mutedInfo: tab.mutedInfo}});
+			} else {
+				if (tabs[removedTabId]){
+					tabs[addedTabId] = {h: GetHash(tab.url), p: tabs[removedTabId].p, n: tabs[removedTabId].n, o: tabs[removedTabId].o};
+				} else {
+					HashTab(tab);
+				}
+				chrome.runtime.sendMessage({command: "tab_removed", windowId: tab.windowId, tabId: removedTabId});
+				chrome.runtime.sendMessage({command: "tab_attached", windowId: tab.windowId, tab: tab, tabId: addedTabId});
+				delete tabs[removedTabId];
+			}
+			schedule_save++;
+		});
+	});
+	chrome.tabs.onActivated.addListener(function(activeInfo){
+		chrome.runtime.sendMessage({command: "tab_activated", windowId: activeInfo.windowId, tabId: activeInfo.tabId});
+	});
+}
+
+chrome.runtime.onMessage.addListener(function(message, sender, sendResponse){
+	switch(message.command){
+		case "background_start":
+			if (!started){
+				Start();
+			}
+		break;
+		case "reload":
+			window.location.reload();
+		break;
+		case "options_reset":
+			ResetOptions();
+		break;
+		case "toolbar_reset":
+			ResetToolbar();
+		break;
+		case "options_save":
+			SaveOptions();
+		break;
+		case "toolbar_options_save":
+			SaveToolbarOptions();
+		break;
+	}
+});
+function log(m){
+	console.log(m);
+}
+chrome.runtime.onStartup.addListener(function(){
+	Start();
+});
+
+if (navigator.userAgent.match("Firefox") === null){
+	chrome.runtime.onSuspend.addListener(function(){
+		hold = true;
+	});
+}
+
