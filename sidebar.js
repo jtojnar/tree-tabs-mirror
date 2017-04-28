@@ -1,9 +1,6 @@
 document.addEventListener('DOMContentLoaded', Initialize(), false);
 
 function Initialize(){
-	// chrome.tabs.query({windowType: "normal"}, function(qtabs){
-		// alert(qtabs[0].url);
-	// });
 	if (bg.hold){
 		setTimeout(function(){ Initialize(); },500);
 		chrome.runtime.sendMessage({command: "background_start"});

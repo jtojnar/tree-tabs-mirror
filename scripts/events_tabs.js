@@ -37,14 +37,14 @@ function SetTabEvents(){
 
 
 
-	/* PREVENT THE DEFAULT BROWSER DROP ACTION */
+	// PREVENT THE DEFAULT BROWSER DROP ACTION
 	$(document).bind('drop dragover', function (event){
 		event.preventDefault();
 	});
 
 
 
-	/* SET DRAG SOURCE */
+	// SET DRAG SOURCE
 	$(document).on('dragstart', '.tab_header', function(event){
 		event.stopPropagation();
 		bg.dt.tabsIds.splice(0, bg.dt.tabsIds.length);
@@ -75,7 +75,7 @@ function SetTabEvents(){
 		
 	 });
 
-	/* SET DROP TARGET */
+	// SET DROP TARGET
 	$(document).on('dragenter', '.drag_entered_top, .drag_entered_bottom, .drag_enter_center', function(event){
 		event.stopPropagation();
 		if ($('.selected').find($(this)).length > 0) return;
@@ -152,7 +152,7 @@ function SetTabEvents(){
 			timeout = false;
 			DragNode = undefined;
 			schedule_update_data++;
-		},100);
+		},500);
 		$('.drag_enter_center, .drag_entered_top, .drag_entered_bottom').css({'display': ''});
 		$('.highlighted_drop_target').removeClass('highlighted_drop_target');
 		$('.tab_header_hover').removeClass('tab_header_hover');
@@ -196,12 +196,12 @@ function SetTabEvents(){
 		}
 	});
 
-	/* SELECT OR CLOSE TAB/PIN */
+	// SELECT OR CLOSE TAB/PIN
 	$(document).on('mousedown', '.tab, .pin', function(event){
 		event.stopPropagation();
 		if (event.button == 0){
 		
-			/* SET SELECTION WITH SHIFT */
+			// SET SELECTION WITH SHIFT
 			if (IOKeys.Shift){
 				$('.pin, .tab').removeClass('selected').removeClass('frozen').removeClass('temporary');
 				if ($(this).index() >= $('.active').index()){
@@ -211,13 +211,13 @@ function SetTabEvents(){
 				}
 			}
 			
-			/* TOGGLE SELECTION WITH CTRL */
+			// TOGGLE SELECTION WITH CTRL
 			if (IOKeys.Ctrl){
 				$(this).toggleClass('selected');
 			}
 		}
 		
-		/* CLOSE TAB */
+		// CLOSE TAB
 		if ($(event.target).is(':not(.expand)')){
 			if ((event.button == 1 && bg.opt.close_with_MMB == true) || $(event.target).is('.close, .close_img')){
 				if ($(this).is('.tab') || bg.opt.allow_pin_close == true){

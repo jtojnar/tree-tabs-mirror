@@ -1,5 +1,5 @@
 var opt = { 
-	"new_open_below": false, "pin_list_multi_row": false, "close_with_MMB": true,
+	"skip_load": false, "new_open_below": false, "pin_list_multi_row": false, "close_with_MMB": true,
 	"always_show_close": false, "allow_pin_close": false,
 	"append_child_tab": "bottom", "append_child_tab_after_limit": "after",
 	"append_orphan_tab": "bottom", "close_other_trees": false,
@@ -24,15 +24,15 @@ var	hold = true,
 function Start(){
 	started = true;
 
-	/* open options to set defaults */
+	// open options to set defaults
 	if (localStorage.getItem("themeDefault") === null){
 		chrome.tabs.create({url: "options.html" });
 	}
 
-	/* all variables needed to load data */
-	var	loaded_options = {}, loaded_opt_toolbar = {}/* , loaded_toolbar = {} */;
+	// all variables needed to load data
+	var	loaded_options = {}, loaded_opt_toolbar = {};
 	
-	/* set loaded options */
+	// set loaded options
 	if (localStorage.getItem("current_options") !== null){
 		loaded_options = JSON.parse(localStorage["current_options"]);
 	}
@@ -42,7 +42,7 @@ function Start(){
 		}
 	}
 
-	/* toolbar options */
+	// toolbar shelfs options (search url-title and which shelf is active)
 	if (localStorage.getItem("current_toolbar_options") !== null){
 		loaded_opt_toolbar = JSON.parse(localStorage["current_toolbar_options"]);
 	}
@@ -61,15 +61,15 @@ function Start(){
 function LoadTabs(retry){
 	chrome.tabs.query({windowType: "normal"}, function(qtabs){
 		
+		// will loop forever until session restore window is shown
 		if (navigator.userAgent.match("Firefox") !== null && qtabs.length == 1 && qtabs[0].url.match("sessionrestore")){
-		// if (navigator.userAgent.match("Firefox") !== null && qtabs.length == 1){
 			setTimeout(function(){
 				LoadTabs(retry);
 			}, 2000);
 			return;
 		}
 
-		/* create current tabs object */
+		// create current tabs object
 		qtabs.forEach(function(Tab){
 			HashTab(Tab);
 		});
@@ -77,39 +77,43 @@ function LoadTabs(retry){
 		var reference_tabs = {};
 		var tabs_matched = 0;
 		
-		qtabs.forEach(function(Tab){
-			for (var t = 0; t < 9999; t++){
-				if (localStorage.getItem("t"+t) !== null){
-					var LoadedTab = JSON.parse(localStorage["t"+t]);
-					if (LoadedTab[1] === tabs[Tab.id].h && reference_tabs[LoadedTab[0]] == undefined){
-						reference_tabs[LoadedTab[0]] = Tab.id;
-						tabs[Tab.id].p = LoadedTab[2];
-						tabs[Tab.id].n = LoadedTab[3];
-						tabs[Tab.id].o = LoadedTab[4];
-						tabs_matched++;
+		// compare saved tabs from storage to current session tabs, but can be skipped if set in options
+		if (opt.skip_load == false){
+			qtabs.forEach(function(Tab){
+				for (var t = 0; t < 9999; t++){
+					if (localStorage.getItem("t"+t) !== null){
+						var LoadedTab = JSON.parse(localStorage["t"+t]);
+						if (LoadedTab[1] === tabs[Tab.id].h && reference_tabs[LoadedTab[0]] == undefined){
+							reference_tabs[LoadedTab[0]] = Tab.id;
+							tabs[Tab.id].p = LoadedTab[2];
+							tabs[Tab.id].n = LoadedTab[3];
+							tabs[Tab.id].o = LoadedTab[4];
+							tabs_matched++;
+							break;
+						}
+						
+					} else {
 						break;
 					}
-					
-				} else {
-					break;
-				}
 
-			}
-		});
-		
-		for (var tabId in tabs){
-			if (reference_tabs[tabs[tabId].p] != undefined){
-				tabs[tabId].p = reference_tabs[tabs[tabId].p];
+				}
+			});
+			
+			// replace parents tabIds to new ones, for that purpose reference_tabs was made before
+			for (var tabId in tabs){
+				if (reference_tabs[tabs[tabId].p] != undefined){
+					tabs[tabId].p = reference_tabs[tabs[tabId].p];
+				}
 			}
 		}
 
 
-		/* will try to find tabs for 3 times */
-		if ((tabs_matched > qtabs.length*0.25) || retry > 3 || localStorage.getItem("t0") === null){
+		// will try to find tabs for 10 times, roughly 30 seconds
+		if (opt.skip_load == true || retry > 10 || localStorage.getItem("t0") === null || localStorage.getItem("t_count") === null || (tabs_matched > JSON.parse(localStorage["t_count"]))){
 			hold = false;
 			StartChromeListeners();
 			PeriodicCheck();
-			AutoSaveData(0);
+			AutoSaveData();
 		} else {
 			setTimeout(function(){
 				LoadTabs(retry+1);
@@ -117,7 +121,8 @@ function LoadTabs(retry){
 		}
 	});
 }
-	
+
+// once a minute checking for missing tabs
 function PeriodicCheck(){
 	setTimeout(function(){
 		PeriodicCheck();
@@ -126,21 +131,27 @@ function PeriodicCheck(){
 				qtabs.forEach(function(Tab){
 					if (tabs[Tab.id] == undefined){
 						HashTab(Tab);
+						setTimeout(function(){
+							chrome.runtime.sendMessage({command: "recheck_tabs"});
+							schedule_save++;
+						},300);
 					}
 				});
 			});
 		}
-	},150000);
+	},60000);
 }
 
-function AutoSaveData(tick){
+// save every 2 seconds if there is anything to save obviously
+function AutoSaveData(){
 	setTimeout(function(){
-		AutoSaveData(tick+1);
+		AutoSaveData();
 		if (schedule_save > 0){
 			schedule_save = 1;
 		}
-		if (!hold && schedule_save > 0 && Object.keys(tabs).length > 0){
+		if (!hold && schedule_save > 0 && Object.keys(tabs).length > 1){
 			chrome.tabs.query({windowType: "normal"}, function(qtabs){
+				localStorage["t_count"] = qtabs.length*0.5;
 				for (var t = 0; t < qtabs.length; t++){
 					if (tabs[qtabs[t].id] != undefined && tabs[qtabs[t].id].h != undefined && tabs[qtabs[t].id].p != undefined && tabs[qtabs[t].id].n != undefined && tabs[qtabs[t].id].o != undefined){
 						var Tab = JSON.stringify([qtabs[t].id, tabs[qtabs[t].id].h, tabs[qtabs[t].id].p, tabs[qtabs[t].id].n, tabs[qtabs[t].id].o]);
@@ -157,22 +168,6 @@ function AutoSaveData(tick){
 
 function SaveOptions(){
 	localStorage["current_options"] = JSON.stringify(opt);
-	localStorage["current_toolbar"] = JSON.stringify(toolbar);
-}
-function ResetOptions(){
-	if (localStorage.getItem("current_options") !== null){
-		localStorage.removeItem("current_options");
-	}
-	window.location.reload();
-}
-function ResetToolbar(){
-	if (localStorage.getItem("current_toolbar") !== null){
-		localStorage.removeItem("current_toolbar");
-	}
-	if (localStorage.getItem("current_toolbar_options") !== null){
-		localStorage.removeItem("current_toolbar_options");
-	}
-	window.location.reload();
 }
 function SaveToolbarOptions(){
 	localStorage["current_toolbar_options"] = JSON.stringify(opt_toolbar);
@@ -194,6 +189,7 @@ function HashTab(tab){
 	tabs[tab.id].h = hash;
 }
 
+// start all listeners
 function StartChromeListeners(){
 	chrome.tabs.onCreated.addListener(function(tab){
 		HashTab(tab);
@@ -260,12 +256,6 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse){
 		break;
 		case "reload":
 			window.location.reload();
-		break;
-		case "options_reset":
-			ResetOptions();
-		break;
-		case "toolbar_reset":
-			ResetToolbar();
 		break;
 		case "options_save":
 			SaveOptions();

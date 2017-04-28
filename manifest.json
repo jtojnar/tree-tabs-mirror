@@ -20,6 +20,11 @@
 	},
 	"permissions": [ "tabs", "sessions", "chrome://favicon/" ],
 	"options_page": "options.html",
+
+	"options_ui": {
+	  "page": "options.html"
+	},
+
 	"sidebar_action": {
 		"default_icon": {
 			"19": "icons/19.png",
@@ -28,5 +33,5 @@
 		"default_panel": "sidebar.html",
 		"default_title": "Tree Tabs"
 	},
-	"version": "0.0.4"
+	"version": "0.0.8"
 }

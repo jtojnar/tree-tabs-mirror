@@ -2,8 +2,9 @@
 
 function UpdateData(){
 	setTimeout(function(){
-		if (schedule_update_data > 0){
-			schedule_update_data = 1;
+		// changed it from 1 to 2 if there are some more changes queued, just in case if something did not catch in the first flow, or changed in those 2 seconds
+		if (schedule_update_data > 1){
+			schedule_update_data = 2;
 		}
 		if (schedule_update_data > 0){
 			$('.pin').each(function(){

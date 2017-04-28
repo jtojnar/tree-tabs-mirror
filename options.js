@@ -542,4 +542,7 @@ function RefreshFields(){
 	} else {
 		$("#field_theme").css({"height": ""});
 	}
+	if (navigator.userAgent.match("Firefox") !== null){
+		$("#field_scrollbars").hide();
+	}
 }

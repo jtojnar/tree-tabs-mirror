@@ -146,6 +146,9 @@
 		"message": " Tabs "
 	},
 
+	"options_skip_load": {
+		"message": " - Discard tree structure after browser's restart, this option is for those who don't use browser's session. Basically it disables loading database at startup."
+	},
 	"options_close_with_MMB": {
 		"message": " - close tabs with middle mouse button"
 	},
@@ -162,7 +165,7 @@
 		"message": " - promote children tabs on close, if disabled, when closing the parent of a tree structure, all tabs will be closed (be careful, because undo close tab will not recover the tree's structure)"
 	},
 	"options_open_tree_on_hover": {
-		"message": " - auto open closed trees when dragging and holding for a second over them"
+		"message": " - auto expand collapsed trees when dragging and holding for a second over them"
 	},
 
 	"options_max_tree_depth": {
