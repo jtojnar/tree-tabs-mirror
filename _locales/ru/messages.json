@@ -1,0 +1,431 @@
+{
+   "button_bookmarks": {
+      "message": "Закладки"
+   },
+   "button_discard": {
+      "message": "Выгрузить все вкладки"
+   },
+   "button_downloads": {
+      "message": "Загрузки"
+   },
+   "button_extensions": {
+      "message": "Расширения"
+   },
+   "button_filter_type": {
+      "message": "Поиск заголовков или URL-адресов"
+   },
+   "button_history": {
+      "message": "История"
+   },
+   "button_move": {
+      "message": "Отсоединить текущую вкладку"
+   },
+   "button_new": {
+      "message": "ЛКМ -  открыть новую вкладку \nСКМ -  дублировать активную вкладку \nПКМ - прокрутка списка к активной вкладке"
+   },
+   "button_options": {
+      "message": "Настройки Tree Tabs"
+   },
+   "button_pin": {
+      "message": "Закрепить / Открепить текущую вкладку"
+   },
+   "button_search": {
+      "message": "Поиск вкладок"
+   },
+   "button_settings": {
+      "message": "Настройки браузера"
+   },
+   "button_tools": {
+      "message": "Дополнительные инструменты"
+   },
+   "button_undo": {
+      "message": "Открыть последнюю закрытую вкладку"
+   },
+   "caption_clear_filter": {
+      "message": "Очистить результаты поиска"
+   },
+   "caption_loading": {
+      "message": "Загрузка…"
+   },
+   "caption_searchbox": {
+      "message": " Поиск вкладок…"
+   },
+   "extDesc": {
+      "message": "Управляйте своими вкладками с боковой панели!"
+   },
+   "extensionName": {
+      "message": "Tree Tabs"
+   },
+   "filter_search_go_next": {
+      "message": "Следующий результат поиска"
+   },
+   "filter_search_go_prev": {
+      "message": "Предыдущий результат поиска"
+   },
+   "option_allow_pin_close": {
+      "message": "закрывать закреплённые вкладки из контекстного меню"
+   },
+   "options_add_theme_button": {
+      "message": "Новая"
+   },
+   "options_always_show_close": {
+      "message": "показывать кнопку закрытия на вкладках"
+   },
+   "options_append_child_tab": {
+      "message": "добавлять новые дочерние вкладки"
+   },
+   "options_append_child_tab_after_limit": {
+      "message": "при достижении максимальной глубины дерева, установить вкладку на том же уровне, но"
+   },
+   "options_append_child_tab_after_limit_after": {
+      "message": "после родительской"
+   },
+   "options_append_child_tab_after_limit_bottom": {
+      "message": "ниже предыдущей"
+   },
+   "options_append_child_tab_after_limit_top": {
+      "message": "выше предыдущей"
+   },
+   "options_append_child_tab_bottom": {
+      "message": "ниже предыдущих"
+   },
+   "options_append_child_tab_top": {
+      "message": "выше предыдущих (обратная иерархия)"
+   },
+   "options_append_orphan_tab": {
+      "message": "открывать недавно закрытые вкладки"
+   },
+   "options_append_orphan_tab_after_active": {
+      "message": "после активной вкладки"
+   },
+   "options_append_orphan_tab_as_child": {
+      "message": "как дочерние для активной вкладки"
+   },
+   "options_after_closing_active_tab": {
+      "message": "После закрытия активной вкладки"
+   },
+   "options_after_closing_active_tab_go_up": {
+      "message": "активировать вкладку выше"
+   },
+   "options_after_closing_active_tab_go_down": {
+      "message": "активировать вкладку ниже"
+   },
+   "options_after_closing_active_tab_go_browser": {
+      "message": "активация вкладок согласно настройкам браузера"
+   },
+   "options_append_orphan_tab_bottom": {
+      "message": "в конце списка"
+   },
+   "options_append_orphan_tab_top": {
+      "message": "в начале списка"
+   },
+   "options_close_other_trees": {
+      "message": "автоматически сворачивать другие деревья при раскрывании дерева"
+   },
+   "options_close_with_MMB": {
+      "message": "закрывать вкладки средней кнопкой мыши"
+   },
+   "options_color_button_background": {
+      "message": " фон кнопки"
+   },
+   "options_color_button_border": {
+      "message": " рамка кнопки"
+   },
+   "options_color_button_hover_background": {
+      "message": " фон при наведении на кнопку"
+   },
+   "options_color_button_hover_border": {
+      "message": " рамка при наведении на кнопку"
+   },
+   "options_color_button_icons": {
+      "message": " иконка кнопки"
+   },
+   "options_color_close_hover_background": {
+      "message": " фон при наведении на кнопку закрытия"
+   },
+   "options_color_close_hover_border": {
+      "message": " рамка при наведении на кнопку закрытия"
+   },
+   "options_color_close_hover_x": {
+      "message": " иконка при наведении на кнопку закрытия"
+   },
+   "options_color_close_x": {
+      "message": " кнопка закрытия [x]"
+   },
+   "options_color_drag_indicator": {
+      "message": " индикатор drag&drop"
+   },
+   "options_color_expand_closed_background": {
+      "message": " фон указателя свёрнутого дерева"
+   },
+   "options_color_expand_closed_border": {
+      "message": " рамка указателя свёрнутого дерева"
+   },
+   "options_color_expand_lines": {
+      "message": " линии ветвей дерева"
+   },
+   "options_color_expand_open_background": {
+      "message": " фон указателя раскрытого дерева"
+   },
+   "options_color_expand_open_border": {
+      "message": " рамка указателя раскрытого дерева"
+   },
+   "options_color_filter_box_background": {
+      "message": " фон окна поиска"
+   },
+   "options_color_filter_box_border": {
+      "message": " рамка окна поиска"
+   },
+   "options_color_filter_box_font": {
+      "message": " шрифт в окне поиска"
+   },
+   "options_color_filter_clear_icon": {
+      "message": " кнопка очистки в окне поиска"
+   },
+   "options_color_pin_list_background": {
+      "message": " фон списка закреплённых вкладок"
+   },
+   "options_color_pin_list_border_bottom": {
+      "message": " разделитель списка закреплённых вкладок"
+   },
+   "options_color_scrollbar_thumb": {
+      "message": " полоса прокрутки"
+   },
+   "options_color_scrollbar_thumb_hover": {
+      "message": " полоса прокрутки при наведении"
+   },
+   "options_color_scrollbar_track": {
+      "message": " фон полосы прокрутки"
+   },
+   "options_color_tab_background": {
+      "message": " фон вкладки"
+   },
+   "options_color_tab_border": {
+      "message": " рамка вкладки"
+   },
+   "options_color_tab_filtered": {
+      "message": " результат поиска"
+   },
+   "options_color_tab_filtered_highlighted": {
+      "message": " выделенный результат поиска"
+   },
+   "options_color_tab_filtered_selected": {
+      "message": " выбранный результат поиска"
+   },
+   "options_color_tab_filtered_selected_active": {
+      "message": " активный результат поиска"
+   },
+   "options_color_tab_hover_background": {
+      "message": " фон при наведении на вкладку"
+   },
+   "options_color_tab_hover_border": {
+      "message": " рамка при наведении на вкладку"
+   },
+   "options_color_tab_list_background": {
+      "message": " фон списка вкладок"
+   },
+   "options_color_tab_selected_background": {
+      "message": " фон активной вкладки"
+   },
+   "options_color_tab_selected_border": {
+      "message": " рамка активной вкладки"
+   },
+   "options_color_tab_selected_hover_background": {
+      "message": " фон при наведении на активную вкладку"
+   },
+   "options_color_tab_selected_hover_border": {
+      "message": " рамка при наведении на активную вкладку"
+   },
+   "options_color_tab_title": {
+      "message": " шрифт заголовка вкладки"
+   },
+   "options_color_tab_title_active": {
+      "message": " шрифт заголовка активной вкладки"
+   },
+   "options_color_tab_title_discarded": {
+      "message": " шрифт заголовка выгруженной вкладки"
+   },
+   "options_color_tabs_menu_background": {
+      "message": " фон"
+   },
+   "options_color_tabs_menu_border": {
+      "message": " рамка"
+   },
+   "options_color_tabs_menu_font": {
+      "message": " шрифт"
+   },
+   "options_color_tabs_menu_hover_background": {
+      "message": " фон при наведении на пункт"
+   },
+   "options_color_tabs_menu_hover_border": {
+      "message": " рамка при наведении на пункт"
+   },
+   "options_color_tabs_menu_separator": {
+      "message": " разделитель"
+   },
+   "options_color_theme_toolbar_background": {
+      "message": " фон панели инструментов"
+   },
+   "options_color_toolbar_border_bottom": {
+      "message": " рамка панели инструментов"
+   },
+   "options_example_menu_item": {
+      "message": "пункт меню"
+   },
+   "options_export_theme_button": {
+      "message": "Экспорт"
+   },
+   "options_import_theme_button": {
+      "message": "Импорт"
+   },
+   "options_loaded_theme_newer_version": {
+      "message": "Похоже, загружаемая тема была сохранена в более новой версии расширения; её невозможно загрузить!"
+   },
+   "options_loaded_theme_older_version": {
+      "message": "Похоже, загружаемая тема была сохранена в более старой версии расширения; некоторые цвета или параметры могут отсутствовать."
+   },
+   "options_max_tree_depth": {
+      "message": "максимальная глубина дерева  (-1 - неограниченное количество ветвей; 0 - отключить древовидную структуру вкладок)"
+   },
+   "options_menu": {
+      "message": " Контекстное меню "
+   },
+   "options_no_theme_to_export": {
+      "message": "Нет темы для экспорта, можете добавить новую :)"
+   },
+   "options_open_tree_on_hover": {
+      "message": "автоматически раскрывать свёрнутые деревья при перетаскивании вкладки с удерживанием курсора над ними"
+   },
+   "options_pin_list_multi_row": {
+      "message": "список закреплённых вкладок в несколько строк"
+   },
+   "options_pinned": {
+      "message": " Панель закреплённых вкладок "
+   },
+   "options_promote_children": {
+      "message": "оставлять дочерние вкладки при закрытии родительской. (Если отключено, то при закрытии родительской вкладки все дочерние вкладки дерева будут закрыты. Будьте осторожны, так как отмена закрытия вкладки не восстановит структуру дерева)"
+   },
+   "options_remove_theme_button": {
+      "message": "Удалить"
+   },
+   "options_rename_theme_button": {
+      "message": "Переименовать"
+   },
+   "options_scrollbar_pin_list": {
+      "message": "высота полосы прокрутки закреплённых вкладок"
+   },
+   "options_scrollbar_tab_list": {
+      "message": "ширина полосы прокрутки списка вкладок"
+   },
+   "options_scrollbars": {
+      "message": " Полоса прокрутки "
+   },
+   "options_skip_load": {
+      "message": "отменить древовидную структуру после перезапуска браузера. Это предназначено для тех, кто не использует сохранение сессии (опция отключает загрузку базы данных при запуске браузера)"
+   },
+   "options_tabs": {
+      "message": " Вкладки "
+   },
+   "options_tabs_size": {
+      "message": "Размер вкладок"
+   },
+   "options_theme": {
+      "message": "Тема"
+   },
+   "options_theme_name_cannot_be_empty": {
+      "message": "Введите название темы."
+   },
+   "options_theme_tabs": {
+      "message": " Внешний вид вкладок "
+   },
+   "options_theme_tabs_sample_text_active_selected": {
+      "message": "Активная"
+   },
+   "options_theme_tabs_sample_text_discarded": {
+      "message": "Выгруженная"
+   },
+   "options_theme_tabs_sample_text_normal": {
+      "message": "Обычная"
+   },
+   "options_theme_tabs_sample_text_search_result": {
+      "message": "Результат поиска"
+   },
+   "options_theme_tabs_sample_text_search_result_higlighted": {
+      "message": "Выделенный результат поиска"
+   },
+   "options_theme_tabs_sample_text_search_result_selected": {
+      "message": "Выбранный результат поиска"
+   },
+   "options_theme_tabs_sample_text_search_result_selected_active": {
+      "message": "Активный результат поиска"
+   },
+   "options_there_is_a_theme_with_this_name": {
+      "message": "Такое название темы уже существует, введите новое."
+   },
+   "options_toolbar": {
+      "message": " Панель инструментов "
+   },
+   "options_available_buttons": {
+      "message": "Настраивайте панель управления перетаскиванием элементов. Чтобы скрыть элемент, переместите его на зелёное поле."
+   },
+   "options_vivaldi": {
+      "message": " Vivaldi "
+   },
+   "opt_url_for_web_panel": {
+      "message": "Вставить этот URL в веб-панель"
+   },
+   "tabs_menu_clone": {
+      "message": "Дублировать вкладку"
+   },
+   "tabs_menu_close": {
+      "message": "Закрыть вкладку"
+   },
+   "tabs_menu_close_other": {
+      "message": "Закрыть другие вкладки"
+   },
+   "tabs_menu_collapse_all": {
+      "message": "Свернуть все деревья"
+   },
+   "tabs_menu_discard": {
+      "message": "Выгрузить вкладку"
+   },
+   "tabs_menu_expand_all": {
+      "message": "Раскрыть все деревья"
+   },
+   "tabs_menu_move": {
+      "message": "Отсоединить вкладку"
+   },
+   "tabs_menu_mute": {
+      "message": "Выключить звук на вкладке"
+   },
+   "tabs_menu_mute_other": {
+      "message": "Выключить звук (на других)"
+   },
+   "tabs_menu_new": {
+      "message": "Новая вкладка"
+   },
+   "tabs_menu_pin": {
+      "message": "Закрепить вкладку"
+   },
+   "tabs_menu_reload": {
+      "message": "Обновить вкладку"
+   },
+   "tabs_menu_settings": {
+      "message": "Настройки Tree Tabs"
+   },
+   "tabs_menu_undo": {
+      "message": "Отменить закрытие"
+   },
+   "tabs_menu_unmute": {
+      "message": "Включить звук на вкладке"
+   },
+   "tabs_menu_unmute_other": {
+      "message": "Включить звук (на других)"
+   },
+   "tabs_menu_unpin": {
+      "message": "Открепить вкладку"
+   },
+   "options_active_tab_font_bold": {
+      "message": "жирный шрифт для активной вкладки"
+   }
+}

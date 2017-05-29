@@ -39,13 +39,13 @@ function SetToolbarEvents(){
 			return;
 		}
 		if (SearchIndex == 0){
-			SearchIndex = $('.tab.filtered').length-1;
+			SearchIndex = $(".tab.filtered").length-1;
 		} else {
 			SearchIndex--;
 		}
-		$('.highlighted_search').removeClass('highlighted_search');
-		$($('.tab.filtered')[SearchIndex]).addClass('highlighted_search');
-		ScrollToTab($('.tab.filtered')[SearchIndex].id);
+		$(".highlighted_search").removeClass("highlighted_search");
+		$($(".tab.filtered")[SearchIndex]).addClass("highlighted_search");
+		ScrollToTab($(".tab.filtered")[SearchIndex].id);
 	});
 
 	// go to next search result
@@ -53,14 +53,14 @@ function SetToolbarEvents(){
 		if (event.button != 0){
 			return;
 		}
-		if (SearchIndex == $('.tab.filtered').length-1){
+		if (SearchIndex == $(".tab.filtered").length-1){
 			SearchIndex = 0;
 		} else {
 			SearchIndex++;
 		}
-		$('.highlighted_search').removeClass('highlighted_search');
-		$($('.tab.filtered')[SearchIndex]).addClass('highlighted_search');
-		ScrollToTab($('.tab.filtered')[SearchIndex].id);
+		$(".highlighted_search").removeClass("highlighted_search");
+		$($(".tab.filtered")[SearchIndex]).addClass("highlighted_search");
+		ScrollToTab($(".tab.filtered")[SearchIndex].id);
 	});
 
 
@@ -71,7 +71,11 @@ function SetToolbarEvents(){
 		}
 		if (event.button == 1){
 			chrome.tabs.query({windowId: CurrentWindowId, active: true}, function(tabs){
-				chrome.tabs.duplicate(tabs[0].id);
+				chrome.tabs.duplicate(tabs[0].id, function(tab){
+					setTimeout(function(){
+						$("#"+tab.id).insertAfter($(".active")[0]);
+					}, 300);
+				});
 			});
 		}
 		if (event.button == 2){
@@ -108,8 +112,8 @@ function SetToolbarEvents(){
 		var tabsArr = [];
 		$(".selected:visible").each(function(){
 			tabsArr.push(parseInt(this.id));
-			if ($('#ch'+this.id).children().length > 0){
-				$($('#ch'+this.id).find('.tab')).each(function(){
+			if ($("#ch"+this.id).children().length > 0){
+				$($("#ch"+this.id).find(".tab")).each(function(){
 					tabsArr.push(parseInt(this.id));
 				});
 			}

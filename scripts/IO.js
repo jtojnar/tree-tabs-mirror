@@ -2,79 +2,82 @@
 
 function SetIOEvents(){
 
-
 	// scroll horizontally on pin list
-	$("#pin_list").mousewheel(function(event, delta){
-		this.scrollLeft-= (delta * 30);
-		event.preventDefault();
-	});
+	$("#pin_list").bind("mousewheel DOMMouseScroll", function(event) {
+		event = event.originalEvent;
+		var delta = event.wheelDelta > 0 || event.detail < 0 ? -1 : 1;
+			var multiplier = 1;
+			for (var t = 1; t < 20; t++){
+				setTimeout(function(){
+					$("#pin_list").scrollLeft($("#pin_list").scrollLeft()+(delta*multiplier));
+				}, t);
+				multiplier++;
+			}
+			multiplier = 20;
+			for (var t = 21; t < 40; t++){
+				setTimeout(function(){
+					$("#pin_list").scrollLeft($("#pin_list").scrollLeft()+(delta*multiplier));
+				}, t);
+				multiplier--;
+			}
 
+	});
+	
+	// this is for faster scrolling in firefox, for some reason its default scrolling is slow
+	if (bg.opt.faster_scroll){
+		$("#tab_list").bind("mousewheel DOMMouseScroll", function(event) {
+			event = event.originalEvent;
+			var delta = event.wheelDelta > 0 || event.detail < 0 ? -1.5 : 1.5;
+			var multiplier = 1;
+			for (var t = 1; t < 40; t++){
+				setTimeout(function(){
+					$("#tab_list").scrollTop($("#tab_list").scrollTop()+(delta*multiplier));
+				}, t);
+				multiplier++;
+			}
+			multiplier = 40;
+			for (var t = 41; t < 80; t++){
+				setTimeout(function(){
+					$("#tab_list").scrollTop($("#tab_list").scrollTop()+(delta*multiplier));
+				}, t);
+				multiplier--;
+			}
+		});
+	}
 
 	// catch keyboard keys
-	$(document).keydown(function(e){
-		if (IOKeys.MouseHoverOver.match("pin_list|tab_list|groups_container")){
-			if (e.which == 16){
-				IOKeys.Shift = true;
+	$(document).keydown(function(event){
+		if (MouseHoverOver == "pin_list"){
+			// ctrl+a to select all
+			if (event.ctrlKey && event.which == 65){
+				$(".pin").addClass("selected");
 			}
-			if (e.which == 17){
-				IOKeys.Ctrl = true;
+			// ctrl+i to invert selection
+			if (event.ctrlKey && event.which == 73){
+				$(".pin").toggleClass("selected");
 			}
-			if (e.which == 65){
-				IOKeys.a = true;
+		}
+		if (MouseHoverOver == "tab_list"){
+			// ctrl+a to select all
+			if (event.ctrlKey && event.which == 65){
+				$(".tab").addClass("selected");
 			}
-			if (e.which == 73){
-				IOKeys.i = true;
-			}
-			if (IOKeys.Ctrl && IOKeys.a){
-				if (IOKeys.MouseHoverOver == "pin_list"){
-					$(".pin").addClass("selected");
-				}
-				if (IOKeys.MouseHoverOver == "tab_list"){
-					$(".tab:visible").addClass("selected");
-				}
-			}
-			if (IOKeys.Ctrl && IOKeys.i){
-				if (IOKeys.MouseHoverOver == "pin_list"){
-					$(".pin").toggleClass("selected");
-				}
-				if (IOKeys.MouseHoverOver == "tab_list"){
-					$(".tab:visible").toggleClass("selected");
-				}
+			// ctrl+i to invert selection
+			if (event.ctrlKey && event.which == 73){
+				$(".tab").toggleClass("selected");
 			}
 		}
 		RefreshGUI();
 	});
 
-	// clear pressed keys on key_up
-	$(document).keyup(function(e){
-		if (e.which == 16){
-			IOKeys.Shift = false;
-		}
-		if (e.which == 17){
-			IOKeys.Ctrl = false;
-		}
-		if (e.which == 65){
-			IOKeys.a = false;
-		}
-		if (e.which == 73){
-			IOKeys.i = false;
-		}
+	$(document).on("dragenter", "#toolbar", function(event){ // set mouse over id
+		MouseHoverOver = this.id;
 	});
-
-	$(document).on("dragend", "", function(event){
-		IOKeys.LMB = false;
-	});
-	$(document).on("dragenter", "#groups_container, #toolbar", function(event){ // set mouse over id
-		IOKeys.MouseHoverOver = this.id;
-	});
-	$(document).on("mouseenter", "#pin_list, #tab_list, #groups_container, #toolbar", function(event){ // set mouse over id
-		IOKeys.MouseHoverOver = this.id;
+	$(document).on("mouseenter", "#pin_list, #tab_list, #toolbar", function(event){ // set mouse over id
+		MouseHoverOver = this.id;
 	});
 	$(document).on("mouseleave", window, function(event){
-		ClearPressedKeys();
-	});
-	$(document).on("mouseup", "body", function(event){
-		IOKeys.LMB = false;
+		MouseHoverOver = "";
 	});
 
 	// remove middle mouse and set hiding menu
@@ -86,13 +89,4 @@ function SetIOEvents(){
 			$(".menu").hide(0);
 		}
 	};
-}
-
-function ClearPressedKeys(){
-	IOKeys.MouseHoverOver = "";
-	IOKeys.LMB = false;
-	IOKeys.Ctrl = false;
-	IOKeys.Shift = false;
-	IOKeys.a = false;
-	IOKeys.i = false;
 }

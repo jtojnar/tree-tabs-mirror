@@ -46,6 +46,7 @@ var ColorsSet = {
 	"tab_filtered_selected": "#0f8079",
 	"tab_filtered_selected_active": "#1299a9",
 	
+	"active_font_weight": "bold",
 	
 	// tabs title
 	"tab_title": "#000000",
@@ -230,7 +231,7 @@ var TabsSizeSets = [
 		"pin_height": "28px",
 		
 		"tab_height": "23px",
-		"tab_height_line": "27px",
+		"tab_height_line": "26px",
 
 		"expand_box_size": "5px",
 		"expand_box_top": "8px",

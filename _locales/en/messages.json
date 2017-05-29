@@ -1,14 +1,10 @@
 {
-
-
-
 	"extensionName": {
 		"message": "Tree Tabs"
 	},
-	"extensionDescription": {
+	"extDesc": {
 		"message": "Manage your tabs in the sidebar!"
 	},
-	
 	"button_new": {
 		"message": "Press left mouse button to open new tab. \nPress middle mouse button to clone the active tab. \nPress right mouse button to scroll the list to the active tab."
 	},
@@ -57,17 +53,12 @@
 	"button_discard": {
 		"message": "Unload tabs"
 	},
-
-	
 	"tabs_menu_expand_all": {
 		"message": "Expand all trees"
 	},
 	"tabs_menu_collapse_all": {
 		"message": "Collapse all trees"
 	},
-	
-	
-	
 	"tabs_menu_new": {
 		"message": "New tab"
 	},
@@ -80,12 +71,9 @@
 	"tabs_menu_reload": {
 		"message": "Reload"
 	},
-
-	
 	"tabs_menu_pin": {
 		"message": "Pin"
 	},
-
 	"tabs_menu_mute": {
 		"message": "Mute"
 	},
@@ -98,10 +86,6 @@
 	"tabs_menu_unmute_other": {
 		"message": "Unmute other"
 	},
-
-
-
-
 	"tabs_menu_unpin": {
 		"message": "Unpin"
 	},
@@ -111,69 +95,54 @@
 	"tabs_menu_close_other": {
 		"message": "Close other"
 	},
-
-	
 	"tabs_menu_undo": {
 		"message": "Undo close"
 	},
 	"tabs_menu_settings": {
 		"message": "Settings"
 	},
-
 	"tabs_menu_discard": {
 		"message": "Unload"
 	},
-
-
-
-
-
-	
-	
+	"options_vivaldi": {
+		"message": " Vivaldi "
+	},
+	"opt_url_for_web_panel": {
+		"message": "Url for the Web Panel"
+	},
 	"options_pinned": {
 		"message": " Pinned tabs bar "
 	},
-
 	"options_pin_list_multi_row": {
-		"message": " - multi row list"
+		"message": "multi row list"
 	},
 	"option_allow_pin_close": {
-		"message": " - allow to close pinned tabs"
+		"message": "allow to close pinned tabs"
 	},
-	
-	
 	"options_tabs": {
 		"message": " Tabs "
 	},
-
 	"options_skip_load": {
-		"message": " - Discard tree structure after browser's restart, this option is for those who don't use browser's session. Basically it disables loading database at startup."
+		"message": "discard tree structure after browser's restart, this option is for those who don't use browser's session. Basically it disables loading database at startup."
 	},
 	"options_close_with_MMB": {
-		"message": " - close tabs with middle mouse button"
+		"message": "close tabs with middle mouse button"
 	},
-	
 	"options_always_show_close": {
-		"message": " - show close button on all tabs"
+		"message": "show close button on all tabs"
 	},
-	
 	"options_close_other_trees": {
-		"message": " - automatically collapse other trees on expand"
+		"message": "automatically collapse other trees on expand"
 	},
-	
 	"options_promote_children": {
-		"message": " - promote children tabs on close, if disabled, when closing the parent of a tree structure, all tabs will be closed (be careful, because undo close tab will not recover the tree's structure)"
+		"message": "promote children tabs on close, if disabled, when closing the parent of a tree structure, all tabs will be closed (be careful, because undo close tab will not recover the trees structure)"
 	},
 	"options_open_tree_on_hover": {
-		"message": " - auto expand collapsed trees when dragging and holding for a second over them"
+		"message": "auto expand collapsed trees when dragging and holding for a second over them"
 	},
-
 	"options_max_tree_depth": {
-		"message": " - maximum tree depth: set it to -1 for unlimited branches, 0 for flat tabs placement (no trees), any number above 0 will be its maximum"
+		"message": "maximum tree depth: set it to -1 for unlimited branches, 0 for flat tabs placement (no trees), any number above 0 will be its maximum"
 	},
-	
-
-
 	"options_append_child_tab": {
 		"message": "append children tabs at the"
 	},
@@ -183,8 +152,6 @@
 	"options_append_child_tab_bottom": {
 		"message": "bottom"
 	},
-	
-
 	"options_append_child_tab_after_limit": {
 		"message": "once reached tree depth, place tab on the same level, but"
 	},
@@ -197,9 +164,6 @@
 	"options_append_child_tab_after_limit_bottom": {
 		"message": "at the bottom"
 	},
-
-	
-	
 	"options_append_orphan_tab": {
 		"message": "append orphan tabs (opened from +, shortcut or bookmark)"
 	},
@@ -215,17 +179,24 @@
 	"options_append_orphan_tab_as_child": {
 		"message": "treat as active's tab child"
 	},
-
+	"options_after_closing_active_tab": {
+		"message": "after closing active tab,"
+	},
+	"options_after_closing_active_tab_go_up": {
+		"message": "activate tab above"
+	},
+	"options_after_closing_active_tab_go_down": {
+		"message": "activate tab below"
+	},
+	"options_after_closing_active_tab_go_browser": {
+		"message": "let browser handle which tab to activate"
+	},
 	"options_theme": {
 		"message": "Theme"
 	},
-	
 	"options_theme_tabs": {
 		"message": " Tabs look "
 	},
-	
-
-	
 	"options_theme_tabs_sample_text_normal": {
 		"message": "Normal"
 	},
@@ -247,31 +218,24 @@
 	"options_theme_tabs_sample_text_search_result_selected_active": {
 		"message": "Search result, selected, active"
 	},
-	
-	
-	
-	
 	"options_toolbar": {
 		"message": " Toolbar "
 	},
-
+	"options_available_buttons": {
+		"message": "Drag and drop buttons to arrange them, drop to the green box, buttons you don't want to use"
+	},
 	"options_scrollbars": {
 		"message": " Scrollbars "
 	},
 	"options_scrollbar_pin_list": {
-		"message": " - pinned tabs bar scrollbar height"
+		"message": "pinned tabs bar scrollbar height"
 	},
 	"options_scrollbar_tab_list": {
-		"message": " - tabs list scrollbar width"
+		"message": "tabs list scrollbar width"
 	},
-	
-
 	"options_tabs_size": {
 		"message": "Tabs size"
 	},
-	
-
-
 	"options_add_theme_button": {
 		"message": "Add new"
 	},
@@ -287,37 +251,24 @@
 	"options_rename_theme_button": {
 		"message": "Rename"
 	},
-	
-
-
 	"options_there_is_a_theme_with_this_name": {
 		"message": "Theme with this name already exists, try a new name"
 	},
 	"options_theme_name_cannot_be_empty": {
 		"message": "Theme name cannot be empty, enter some name"
 	},
-	
 	"options_no_theme_to_export": {
 		"message": "No theme to export, maybe add a new one :)"
 	},
-
-	
 	"options_loaded_theme_older_version": {
 		"message": "Looks like loaded theme was saved in older version of the extension, some colors or options might be missing"
 	},
-	
 	"options_loaded_theme_newer_version": {
 		"message": "Looks like loaded theme was saved in a newer version of the extension, can't load!"
 	},
-	
-
-
-	
-	
 	"options_color_theme_toolbar_background": {
 		"message": " toolbar background"
 	},
-	
 	"options_color_toolbar_border_bottom": {
 		"message": " toolbar borders"
 	},
@@ -327,7 +278,6 @@
 	"options_color_button_border": {
 		"message": " button borders"
 	},
-	
 	"options_color_button_background": {
 		"message": " button background"
 	},
@@ -349,10 +299,6 @@
 	"options_color_filter_clear_icon": {
 		"message": " searchbox clear button"
 	},
-	
-	
-
-
 	"options_color_pin_list_border_bottom": {
 		"message": " pin list separator line"
 	},
@@ -375,10 +321,6 @@
 	"options_color_tab_hover_border": {
 		"message": " hover over tab, border"
 	},
-	
-	
-	
-	
 	"options_color_drag_indicator": {
 		"message": " drag&drop indicator"
 	},
@@ -391,8 +333,6 @@
 	"options_color_tab_title_discarded": {
 		"message": " unloaded tab title font"
 	},
-	
-	
 	"options_color_tab_selected_background": {
 		"message": " selected tab background"
 	},
@@ -453,55 +393,33 @@
 	"options_color_scrollbar_track": {
 		"message": " scrollbar background"
 	},
-
-
 	"options_color_tabs_menu_background": {
 		"message": " background"
 	},
-
 	"options_color_tabs_menu_border": {
 		"message": " border"
 	},
-
 	"options_color_tabs_menu_hover_background": {
 		"message": " hover over item, background"
 	},
-
 	"options_color_tabs_menu_hover_border": {
 		"message": " hover over item, border"
 	},
-
 	"options_color_tabs_menu_font": {
 		"message": " font"
 	},
-
 	"options_color_tabs_menu_separator": {
 		"message": " separator"
 	},
-
-
-
 	"options_example_menu_item": {
 		"message": "menu item"
 	},
-	
-	
 	"options_menu": {
 		"message": " Menu "
 	},
-	
-	
-
-
-
-
-
-
-	
-	
-
-
-	
+	"options_active_tab_font_bold": {
+		"message": "bold font for active tab"
+	},
 	"caption_clear_filter": {
 		"message": "Clear search results"
 	},
@@ -510,5 +428,14 @@
 	},
 	"caption_searchbox": {
 		"message": " Search tabs..."
+	},
+	"options_never_show_close": {
+	 "message": "don't show close button (option above will be ignored)"
+	},
+	"tabs_menu_close_tree": {
+		"message": "Close tree"
+	},
+	"options_faster_scroll": {
+		"message": "Faster scrolling"
 	}
 }

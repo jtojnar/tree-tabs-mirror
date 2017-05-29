@@ -1,9 +1,4 @@
 {
-	"applications": {
-		"gecko": {
-			"id": "TreeTabs@jagiello.it"
-		}
-	},
 	"manifest_version": 2,
 	"default_locale": "en",
 	"background": {
@@ -11,27 +6,47 @@
 		"persistent": true
 	},
 	"name": "Tree Tabs",
-	"description": "",
+	"description": "__MSG_extDesc__",
 	"icons": {
 		"128": "icons/128.png",
-		"19": "icons/19.png",
-		"38": "icons/38.png",
-		"48": "icons/48.png"
+		"48": "icons/48.png",
+		"38": "icons/24.png",
+		"19": "icons/16.png",
+		"16": "icons/16.png"
 	},
 	"permissions": [ "tabs", "sessions", "chrome://favicon/" ],
-	"options_page": "options.html",
-
-	"options_ui": {
-	  "page": "options.html"
-	},
 
 	"sidebar_action": {
 		"default_icon": {
-			"19": "icons/19.png",
+			"19": "icons/16.png",
 			"38": "icons/38.png"
 		},
 		"default_panel": "sidebar.html",
 		"default_title": "Tree Tabs"
 	},
-	"version": "0.0.8"
+	"commands": {
+		"goto_tab_above": {
+			"suggested_key": {
+				"default": "Alt+1"
+			},
+			"description": "Go to tab above"
+		},
+		"goto_tab_below": {
+			"suggested_key": {
+				"default": "Alt+2"
+			},
+			"description": "Go to tab below"
+		}
+	},
+	"options_page": "options.html",
+	"applications": {
+		"gecko": {
+			"id": "TreeTabs@jagiello.it"
+		}
+	},
+	"options_ui": {
+		"page": "options.html",
+		"open_in_tab":true
+	},
+	"version": "0.0.15"
 }

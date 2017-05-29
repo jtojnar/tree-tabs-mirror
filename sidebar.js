@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', Initialize(), false);
+document.addEventListener("DOMContentLoaded", Initialize(), false);
 
 function Initialize(){
 	if (bg.hold){
@@ -31,7 +31,7 @@ function Initialize(){
 		if (navigator.userAgent.match("Firefox") === null){
 			document.styleSheets[0].insertRule("::-webkit-scrollbar { width:"+theme.ScrollbarTabList+"px; height:"+theme.ScrollbarPinList+"px; }", 0);
 		}
-	
+			
 		chrome.tabs.query({currentWindow: true}, function(tabs){
 			CurrentWindowId = tabs[0].windowId;
 
@@ -69,6 +69,8 @@ function Initialize(){
 				}
 				$("#toolbar_separator").remove();
 				$("#toolbar_unused_buttons").remove();
+			} else {
+				$("#toolbar").children().remove();
 			}
 
 			
@@ -81,26 +83,26 @@ function Initialize(){
 
 			tabs.forEach(function(Tab){
 				if (bg.tabs[Tab.id] && !Tab.pinned){
-					$('#'+Tab.id).addClass(bg.tabs[Tab.id].o);
-					if ($('#'+bg.tabs[Tab.id].p).is('.tab') && $('#'+Tab.id).find( $('#ch'+bg.tabs[Tab.id].p)).length == 0){
-						$('#ch'+bg.tabs[Tab.id].p).append($('#'+Tab.id));
+					$("#"+Tab.id).addClass(bg.tabs[Tab.id].o);
+					if ($("#"+bg.tabs[Tab.id].p).length > 0 && $("#"+bg.tabs[Tab.id].p).is(".tab") && $("#"+Tab.id).find( $("#ch"+bg.tabs[Tab.id].p)).length == 0){
+						$("#ch"+bg.tabs[Tab.id].p).append($("#"+Tab.id));
 					}
 				}
 			});
 			
 			tabs.forEach(function(Tab){
-				if ($('#'+Tab.id)[0] && $('#'+Tab.id).parent().children().eq(bg.tabs[Tab.id].n)[0]){
-					if ($('#'+Tab.id).index() > bg.tabs[Tab.id].n){
-						$('#'+Tab.id).insertBefore($('#'+Tab.id).parent().children().eq(bg.tabs[Tab.id].n));
+				if ($("#"+Tab.id)[0] && $("#"+Tab.id).parent().children().eq(bg.tabs[Tab.id].n)[0]){
+					if ($("#"+Tab.id).index() > bg.tabs[Tab.id].n){
+						$("#"+Tab.id).insertBefore($("#"+Tab.id).parent().children().eq(bg.tabs[Tab.id].n));
 					} else {
-						$('#'+Tab.id).insertAfter($('#'+Tab.id).parent().children().eq(bg.tabs[Tab.id].n));
+						$("#"+Tab.id).insertAfter($("#"+Tab.id).parent().children().eq(bg.tabs[Tab.id].n));
 					}
 				}
 			});
 			tabs.forEach(function(Tab){
-				if ($('#'+Tab.id)[0] && $('#'+Tab.id).parent().children().eq(bg.tabs[Tab.id].n)[0]){
-					if ($('#'+Tab.id).index() < bg.tabs[Tab.id].n){
-						$('#'+Tab.id).insertAfter($('#'+Tab.id).parent().children().eq(bg.tabs[Tab.id].n));
+				if ($("#"+Tab.id)[0] && $("#"+Tab.id).parent().children().eq(bg.tabs[Tab.id].n)[0]){
+					if ($("#"+Tab.id).index() < bg.tabs[Tab.id].n){
+						$("#"+Tab.id).insertAfter($("#"+Tab.id).parent().children().eq(bg.tabs[Tab.id].n));
 					}
 				}
 			});
@@ -112,6 +114,10 @@ function Initialize(){
 			RefreshGUI();
 			RefreshExpandStates();
 			UpdateData();
+			
+			if (navigator.userAgent.match("Vivaldi") !== null){
+				VivaldiRefreshMediaIcons();
+			}
 			
 			delete theme;
 		});

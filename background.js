@@ -2,8 +2,8 @@ var opt = {
 	"skip_load": false, "new_open_below": false, "pin_list_multi_row": false, "close_with_MMB": true,
 	"always_show_close": false, "allow_pin_close": false,
 	"append_child_tab": "bottom", "append_child_tab_after_limit": "after",
-	"append_orphan_tab": "bottom", "close_other_trees": false,
-	"promote_children": true, "open_tree_on_hover": true, "max_tree_depth": -1
+	"append_orphan_tab": "bottom", "after_closing_active_tab": "below", "close_other_trees": false,
+	"promote_children": true, "open_tree_on_hover": true, "max_tree_depth": -1, "never_show_close": false, "faster_scroll": false
 };
 var opt_toolbar = {
 	"active_toolbar_tool": "", "filter_type": "url"
@@ -61,12 +61,22 @@ function Start(){
 function LoadTabs(retry){
 	chrome.tabs.query({windowType: "normal"}, function(qtabs){
 		
-		// will loop forever until session restore window is shown
-		if (navigator.userAgent.match("Firefox") !== null && qtabs.length == 1 && qtabs[0].url.match("sessionrestore")){
-			setTimeout(function(){
-				LoadTabs(retry);
-			}, 2000);
-			return;
+		// will loop forever if session restore tab is found
+		if (navigator.userAgent.match("Firefox") !== null){
+			var halt = false;
+			for (var t = 0; t < qtabs.length; t++){
+				if (qtabs[t].url.match("sessionrestore")){
+					halt = true;
+					chrome.tabs.update(qtabs[t].id, { active: true });
+					break;
+				}
+			}
+			if (halt){
+				setTimeout(function(){
+					LoadTabs(retry);
+				}, 2000);
+				return;
+			}
 		}
 
 		// create current tabs object
@@ -133,8 +143,10 @@ function PeriodicCheck(){
 						HashTab(Tab);
 						setTimeout(function(){
 							chrome.runtime.sendMessage({command: "recheck_tabs"});
-							schedule_save++;
 						},300);
+						setTimeout(function(){
+							schedule_save++;
+						},600);
 					}
 				});
 			});
@@ -163,7 +175,7 @@ function AutoSaveData(){
 				schedule_save--;
 			});
 		}
-	}, 2000);
+	}, 1000);
 }
 
 function SaveOptions(){
@@ -175,7 +187,7 @@ function SaveToolbarOptions(){
 
 function HashTab(tab){
 	if (tabs[tab.id] == undefined){
-		tabs[tab.id] = {h: 0, p: tab.pinned ? 'pin_list' : 'tab_list', n: tab.index, o: 'n'};
+		tabs[tab.id] = {h: 0, p: tab.pinned ? "pin_list" : "tab_list", n: tab.index, o: "n"};
 	}
 	var hash = 0;
 	if (tab.url.length === 0){
@@ -215,8 +227,8 @@ function StartChromeListeners(){
 	});
 	chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
 		if (tabs[tabId] == undefined || changeInfo.url != undefined){ HashTab(tab); }
-		if (changeInfo.pinned == true){ tabs[tabId].p = 'pin_list'; }
-		if (changeInfo.pinned == false){ tabs[tabId].p = 'tab_list'; }
+		if (changeInfo.pinned == true){ tabs[tabId].p = "pin_list"; }
+		if (changeInfo.pinned == false){ tabs[tabId].p = "tab_list"; }
 		chrome.runtime.sendMessage({command: "tab_updated", windowId: tab.windowId, tab: tab, tabId: tabId, changeInfo: changeInfo});
 		if (changeInfo.url != undefined || changeInfo.pinned != undefined){schedule_save++;}
 	});

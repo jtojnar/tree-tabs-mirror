@@ -41,6 +41,14 @@
 				width: 850px;
 				word-wrap: break-word;
 				overflow: hidden;
+				margin-bottom:15px;
+			}
+			ul {
+				padding-left: 22px;
+			}
+			
+			ul li {
+				margin: 5px;
 			}
 			.label {
 				padding-left: 6px;
@@ -66,104 +74,132 @@
 		</style>
 		<link type="text/css" rel="stylesheet" media="all" href="../theme/theme.css" id="theme" />
 	</head>
-	<body>
+	<body id="body">
 		<div style="width:850px; align:left;"><span style="width:100%; font-size:20px; display:inline-block; text-align:center; ">Tree Tabs</span></div>
 		<br>
 
 
-		<fieldset class="field">
+		<fieldset class="field" id="field_vivaldi">
+			<legend class="label" id="options_vivaldi"></legend>
+			<table>
+				<tr>
+					<td class="label" id="opt_url_for_web_panel"></td>
+					<td><input style="position:relative;width:450px;left:8px;" type="text" id="url_for_web_panel" value="test"></input></td>
+				</tr>
+			</table>
+		</fieldset>
+
+		<fieldset class="field" id="field_pins">
 			<legend class="label" id="options_pinned" ></legend>
 			<table style="display:inline-block;">
 				<tr>
 					<td><input type="checkbox" class="opt_checkbox bg_opt" id="pin_list_multi_row"></input></td>
+					<td style="position:relative;left:2px;width:3px;">-</td>
 					<td class="label" id="options_pin_list_multi_row"></td>
 				</tr>
 				<tr>
 					<td><input type="checkbox" class="opt_checkbox bg_opt" id="allow_pin_close"></input></td>
+					<td style="position:relative;left:2px;width:3px;">-</td>
 					<td class="label" id="option_allow_pin_close"></td>
 				</tr>
 			</table>
 		</fieldset>
-		<br>
 		
-		<fieldset class="field">
+
+		<fieldset class="field" id="field_tabs">
 			<legend class="label" id="options_tabs"></legend>
 			<table style="display:vinline-block;">
 				<tr>
-					<td><input type="checkbox" class="opt_checkbox bg_opt" id="skip_load"></input></td>
-					<td class="label" id="options_skip_load"></td>
-				</tr>
-				<tr>
 					<td><input type="checkbox" class="opt_checkbox bg_opt" id="close_with_MMB"></input></td>
+					<td style="position:relative;left:2px;width:3px;">-</td>
 					<td class="label" id="options_close_with_MMB"></td>
 				</tr>
+				<tr>
 					<td><input type="checkbox" class="opt_checkbox bg_opt" id="always_show_close"></input></td>
+					<td style="position:relative;left:2px;width:3px;">-</td>
 					<td class="label" id="options_always_show_close"></td>
-				<tr>
 				</tr>
+				<tr>
+					<td><input type="checkbox" class="opt_checkbox bg_opt" id="never_show_close"></input></td>
+					<td style="position:relative;left:2px;width:3px;">-</td>
+					<td class="label" id="options_never_show_close"></td>
+				</tr>
+				<tr>
 					<td><input type="checkbox" class="opt_checkbox bg_opt" id="close_other_trees"></input></td>
+					<td style="position:relative;left:2px;width:3px;">-</td>
 					<td class="label" id="options_close_other_trees"></td>
-				<tr>
 				</tr>
-					<td><input type="checkbox" class="opt_checkbox bg_opt" id="promote_children"></input></td>
-					<td class="label" id="options_promote_children"></td>
 				<tr>
-				</tr>
 					<td><input type="checkbox" class="opt_checkbox bg_opt" id="open_tree_on_hover"></input></td>
+					<td style="position:relative;left:2px;width:3px;">-</td>
 					<td class="label" id="options_open_tree_on_hover"></td>
-				<tr>
-			</table>
-
-
-			<table style="display:vinline-block;">
-				<tr>
-					<td class="label" id="options_append_child_tab"></td>
-					<td>
-						<select id="append_child_tab">
-							<option class="bg_opt_drop_down_menu" id="options_append_child_tab_top" value="top"></option>
-							<option class="bg_opt_drop_down_menu" id="options_append_child_tab_bottom" value="bottom"></option>
-						</select>
-					</td>
 				</tr>
-			</table>
-				
-			<table style="display:vinline-block;">
 				<tr>
-					<td class="label" id="options_append_child_tab_after_limit"></td>
-					<td>
-						<select id="append_child_tab_after_limit">
-							<option class="bg_opt_drop_down_menu" id="options_append_child_tab_after_limit_top" value="top"></option>
-							<option class="bg_opt_drop_down_menu" id="options_append_child_tab_after_limit_after" value="after"></option>
-							<option class="bg_opt_drop_down_menu" id="options_append_child_tab_after_limit_bottom" value="bottom"></option>
-						</select>
-					</td>
+					<td style="position:relative;top:-5px;"><input type="checkbox" class="opt_checkbox bg_opt" id="promote_children"></input></td>
+					<td style="position:relative;top:-5px;left:2px;width:3px;">-</td>
+					<td class="label" id="options_promote_children"></td>
+				</tr>
+				<tr>
+					<td style="position:relative;top:-1px;"><input type="checkbox" class="opt_checkbox bg_opt" id="skip_load"></input></td>
+					<td style="position:relative;top:-1px;left:2px;width:3px;">-</td>
+					<td class="label" id="options_skip_load"></td>
 				</tr>
 			</table>
 			
-			<table style="display:vinline-block;">
+			<table id="faster_scroll_for_firefox" style="display:vinline-block;">
 				<tr>
-					<td class="label" id="options_append_orphan_tab"></td>
-					<td>
-						<select id="append_orphan_tab">
-							<option class="bg_opt_drop_down_menu" id="options_append_orphan_tab_top" value="top"></option>
-							<option class="bg_opt_drop_down_menu" id="options_append_orphan_tab_after_active" value="after_active"></option>
-							<option class="bg_opt_drop_down_menu" id="options_append_orphan_tab_bottom" value="bottom"></option>
-							<option class="bg_opt_drop_down_menu" id="options_append_orphan_tab_as_child" value="as_child"></option>
-						</select>
-					</td>
+					<td><input type="checkbox" class="opt_checkbox bg_opt" id="faster_scroll"></input></td>
+					<td style="position:relative;left:2px;width:3px;">-</td>
+					<td class="label" id="options_faster_scroll"></td>
 				</tr>
 			</table>
-
+			
+			
+			<ul>
+				<li>
+					<label class="label" id="options_append_child_tab"></label>
+					<select id="append_child_tab">
+						<option class="bg_opt_drop_down_menu" id="options_append_child_tab_top" value="top"></option>
+						<option class="bg_opt_drop_down_menu" id="options_append_child_tab_bottom" value="bottom"></option>
+					</select>
+				</li>
+				<li>
+					<label class="label" id="options_append_orphan_tab"></label>	
+					<select id="append_orphan_tab">
+						<option class="bg_opt_drop_down_menu" id="options_append_orphan_tab_top" value="top"></option>
+						<option class="bg_opt_drop_down_menu" id="options_append_orphan_tab_after_active" value="after_active"></option>
+						<option class="bg_opt_drop_down_menu" id="options_append_orphan_tab_bottom" value="bottom"></option>
+						<option class="bg_opt_drop_down_menu" id="options_append_orphan_tab_as_child" value="as_child"></option>
+					</select>
+				</li>
+				<li>
+					<label class="label" id="options_after_closing_active_tab"></label>	
+					<select id="after_closing_active_tab">
+						<option class="bg_opt_drop_down_menu" id="options_after_closing_active_tab_go_up" value="above"></option>
+						<option class="bg_opt_drop_down_menu" id="options_after_closing_active_tab_go_down" value="below"></option>
+						<option class="bg_opt_drop_down_menu" id="options_after_closing_active_tab_go_browser" value="browser"></option>
+					</select>
+				</li>
+				<li>
+					<label class="label" id="options_append_child_tab_after_limit"></label>	
+					<select id="append_child_tab_after_limit">
+						<option class="bg_opt_drop_down_menu" id="options_append_child_tab_after_limit_top" value="top"></option>
+						<option class="bg_opt_drop_down_menu" id="options_append_child_tab_after_limit_after" value="after"></option>
+						<option class="bg_opt_drop_down_menu" id="options_append_child_tab_after_limit_bottom" value="bottom"></option>
+					</select>
+				</li>
+			</ul>
 			<table style="display:vinline-block;">
 				<tr>
 					<td>
 						<input type="number" style="width:80px;" min="-1" max="9999" step="1" id="max_tree_depth"></input>
 					</td>
+					<td style="position:relative;left:2px;width:3px;">-</td>
 					<td class="label" id="options_max_tree_depth"></td>
 				</tr>
 			</table>
 			
-		</fieldset><br>
+		</fieldset>
 		
 		
 		<fieldset class="field" id="field_theme" style="width:850px;">
@@ -171,20 +207,24 @@
 			
 			<select id="theme_list" style="padding-right:6px;"></select>
 			<input type="text" id="new_theme_name" name="untitled" value="untitled"></input>
+			<button class="set_button" type="button" id="options_rename_theme_button" style="margin:10px;">Rename</button>
 			<button class="set_button" type="button" id="options_add_theme_button" style="margin:10px;">Add new</button>
 			<button class="set_button" type="button" id="options_remove_theme_button" style="margin:10px;">Remove</button>
 			<button class="set_button" type="button" id="options_import_theme_button" style="margin:10px;">Import</button>
 			<button class="set_button" type="button" id="options_export_theme_button" style="margin:10px;">Export</button>
-				<input type="file" multiple id="import_theme" style="display:none"></input>
-			<button class="set_button" type="button" id="options_rename_theme_button" style="margin:10px;">Remove</button>
+			<input type="file" multiple id="import_theme" style="display:none"></input>
 
 							
 							
 			<fieldset class="field" id="field_show_toolbar" style="width:816px;">
-				<legend id="toolbar_legend"> <input type="checkbox" id="show_toolbar"></input><label class="label" id="options_toolbar"></label></legend>
+				<legend id="toolbar_legend">
+					<input type="checkbox" style="position:relative; top:-1px;" id="show_toolbar"></input>
+					<label class="label" style="position:relative; top:-3px;" id="options_toolbar"></label>
+				</legend>
 
-				<br>
-				<div class="toolbar" id="toolbar" style="height: 94px; width: 250px; display: inline-block;">
+				<label class="label" style="margin-bottom: 10px; margin-top: 4px; display: inline-block;" id="options_available_buttons"></label>	
+
+				<div class="toolbar" id="toolbar" style="height: 94px; width: 250px;">
 					<div class="toolbar_int" id="toolbar_main">
 						<div class="button" id="button_new"><div class="button_img"></div></div>
 						<div class="button" id="button_pin"><div class="button_img"></div></div>
@@ -219,8 +259,7 @@
 					</div>				
 				</div>
 				<br>
-
-				<table style="display: inline-block; margin-top: 10px;margin-left: 10px;vertical-align: top;">
+				<table id="toolbar_colors" style="margin: 10px; vertical-align: top;">
 				
 					<tr>
 						<td><div class="cb"><input class="cp" id="toolbar_background" type="color"></div></td>
@@ -253,10 +292,7 @@
 						<td class="cpl" id="options_color_filter_clear_icon"></td>
 					</tr>
 				</table>
-				
-				
-
-			</fieldset><br>
+			</fieldset>
 
 
 			<fieldset class="field" id="Tabs" style="width:816px;">
@@ -270,11 +306,21 @@
 							<div class="tab_list" id="tab_list" style="height: 80px; width: 250px;">
 							</div>
 						</td>
-						<td>
-							<button id="options_tabs_size_down" style="margin-top:10px;margin-left:10px;">-</button>
-							<label class="label" id="options_tabs_size"></label>
-							<button id="options_tabs_size_up" style="margin-top:10px;">+</button>
-						</td>
+						
+						<table style="position:relative;top:-35px;display: inline-block;">
+							<tr>
+								<td>
+									<button id="options_tabs_size_down" style="margin-top:10px;margin-left:10px;">-</button>
+									<label class="label" id="options_tabs_size"></label>
+									<button id="options_tabs_size_up" style="margin-top:10px;">+</button>
+								</td>
+							</tr>
+							<tr>
+								<td style="position:relative;left:10px">
+								<input style="position:relative;top:2px;" type="checkbox" id="active_tab_font_bold"></input> - <label class="label" id="options_active_tab_font_bold"></label>
+								</td>
+							</tr>
+						</table>
 					</tr>
 				</table>
 				<table style="display: inline-block; margin-top: 10px;margin-left: 10px;vertical-align: top;">
@@ -285,6 +331,8 @@
 						<td class="cpl" id="options_color_pin_list_background"></td>
 						<td><div class="cb"><input class="cp" id="tab_list_background" type="color"></div></td>
 						<td class="cpl" id="options_color_tab_list_background"></td>
+						<td><div class="cb"><input class="cp" id="expand_lines" type="color"></div></td>
+						<td class="cpl" id="options_color_expand_lines"></td>
 					</tr>
 					<tr>
 						<td><div class="cb"><input class="cp" id="tab_background" type="color"></div></td>
@@ -296,7 +344,6 @@
 						<td><div class="cb"><input class="cp" id="tab_hover_border" type="color"></div></td>
 						<td class="cpl" id="options_color_tab_hover_border"></td>
 					</tr>
-
 					<tr>
 						<td><div class="cb"><input class="cp" id="drag_indicator" type="color"></div></td>
 						<td class="cpl" id="options_color_drag_indicator"></td>
@@ -307,9 +354,6 @@
 						<td><div class="cb"><input class="cp" id="tab_title_discarded" type="color"></div></td>
 						<td class="cpl" id="options_color_tab_title_discarded"></td>
 					</tr>
-
-
-
 					<tr>
 						<td><div class="cb"><input class="cp" id="tab_selected_background" type="color"></div></td>
 						<td class="cpl" id="options_color_tab_selected_background"></td>
@@ -330,9 +374,6 @@
 						<td><div class="cb"><input class="cp" id="tab_filtered_selected_active" type="color"></div></td>
 						<td class="cpl" id="options_color_tab_filtered_selected_active"></td>
 					</tr>
-
-					
-					
 					<tr>
 						<td><div class="cb"><input class="cp" id="close_x" type="color"></div></td>
 						<td class="cpl" id="options_color_close_x"></td>
@@ -353,13 +394,9 @@
 						<td><div class="cb"><input class="cp" id="expand_closed_background" type="color"></div></td>
 						<td class="cpl" id="options_color_expand_closed_background"></td>
 					</tr>
-					<tr>
-						<td><div class="cb"><input class="cp" id="expand_lines" type="color"></div></td>
-						<td class="cpl" id="options_color_expand_lines"></td>
-					</tr>
 
 				</table>
-			</fieldset><br>
+			</fieldset>
 
 			<fieldset class="field" id="field_scrollbars" style="width:816px;">
 				<legend class="label" id="options_scrollbars"></legend>
@@ -377,7 +414,8 @@
 						<td>
 							<table style="display:inline-block;vertical-align:top;">
 								<tr>
-									<td><input type="number" style="width:50px;" min="0" max="20" step="1" id="scrollbar_pin_list"></input></td>
+									<td><input type="number" style="width:40px;" min="0" max="20" step="1" id="scrollbar_pin_list"></input></td>
+									<td style="position:relative;left:2px;width:3px;">-</td>
 									<td class="label" id="options_scrollbar_pin_list"></td>
 
 									<td><div class="cb"><input class="cp" id="scrollbar_thumb" type="color"></div></td>
@@ -386,7 +424,8 @@
 									<td class="cpl" id="options_color_scrollbar_thumb_hover"></td>
 								</tr>
 								<tr>
-									<td><input type="number" style="width:50px;" min="0" max="20" step="1" id="scrollbar_tab_list"></input></td>
+									<td><input type="number" style="width:40px;" min="0" max="20" step="1" id="scrollbar_tab_list"></input></td>
+									<td style="position:relative;left:2px;width:3px;">-</td>
 									<td class="label" id="options_scrollbar_tab_list"></td>
 									
 									<td><div class="cb"><input class="cp" id="scrollbar_track" type="color"></div></td>
@@ -396,20 +435,21 @@
 						</td>
 					</tr>
 				</table>
-			</fieldset><br>
+			</fieldset>
 
 			<fieldset class="field" style="width:816px;">
 				<legend class="label" id="options_menu"></legend>
-		<ul class="menu" id="tabs_menu" style="display:inline-block;position:relative;top:0px;left:0px;">
-			<li class="menu_item"></li>
-			<div class="separator"></div>
-			<li class="menu_item"></li>
-			<div class="separator"></div>
-			<li class="menu_item"></li>
-		</ul>
+				
+				<ul class="menu" id="tabs_menu" style="display:inline-block;position:relative;top:0px;left:0px;">
+					<li class="menu_item"></li>
+					<div class="separator"></div>
+					<li class="menu_item"></li>
+					<div class="separator"></div>
+					<li class="menu_item"></li>
+				</ul>
 				
 
-				<table style="display:inline-block;vertical-align:top;">
+				<table style="display:inline-block;vertical-align:top;margin-left:10px;margin-top:16px;">
 					<tr>
 						<td><div class="cb"><input class="cp" id="tabs_menu_background" type="color"></div></td>
 						<td class="cpl" id="options_color_tabs_menu_background"></td>
@@ -429,12 +469,12 @@
 						<td class="cpl" id="options_color_tabs_menu_separator"></td>
 					</tr>
 				</table>
-			</fieldset><br>
+			</fieldset>
 		</fieldset>			
 		
 		<script type="text/javascript" src="../lib_jquery/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="../defaults.js"></script>
-		<script type="text/javascript" src="../scripts/refresh.js"></script>
+		<script type="text/javascript" src="../scripts/events_refresh.js"></script>
 		<script type="text/javascript" src="../scripts/tabs.js"></script>
 		<script type="text/javascript" src="../options.js"></script>
 
