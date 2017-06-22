@@ -209,8 +209,8 @@
 	"options_theme_tabs_sample_text_search_result": {
 		"message": "Search result"
 	},
-	"options_theme_tabs_sample_text_search_result_higlighted": {
-		"message": "Search result higlighted"
+	"options_theme_tabs_sample_text_search_result_highlighted": {
+		"message": "Search result highlighted"
 	},
 	"options_theme_tabs_sample_text_search_result_selected": {
 		"message": "Search result, selected"

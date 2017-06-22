@@ -161,7 +161,7 @@ var TabsSizeSets = [
 		"pin_height": "24px",
 		
 		"tab_height": "19px",
-		"tab_height_line": "22px",
+		"tab_height_line": "23px",
 
 		"expand_box_size": "5px",
 		"expand_box_top": "6px",

@@ -103,7 +103,7 @@ function LoadTheme(themeName){
 	
 
 	AppendTab({tab: {id: "t7", pinned: false}, Append: true});
-	$("#tab_titlet7")[0].textContent = chrome.i18n.getMessage("options_theme_tabs_sample_text_search_result_higlighted");
+	$("#tab_titlet7")[0].textContent = chrome.i18n.getMessage("options_theme_tabs_sample_text_search_result_highlighted");
 	$(".tab#t7").addClass("filtered highlighted_search");
 
 

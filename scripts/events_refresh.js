@@ -97,22 +97,25 @@ function GetFaviconAndTitle(tabId) {
 				$("#tab_title" + tab.id)[0].textContent = title;
 				$("#tab_header" + tab.id).attr("title", title);
 				
-					// compatibility with Tab suspender extension
-					if (tab.favIconUrl != undefined && tab.favIconUrl.match("data:image/png;base64") != null) {
-						$("#tab_header" + tab.id).css({ "background-image": "url(" + tab.favIconUrl + ")" });
-						return;
-					}
-
-					// change favicon
-					if (tab.url.match("opera://|vivaldi://|browser://|chrome://|chrome-extension://|about:") != null/*  || !tab.favIconUrl */) {
+				// compatibility with various Tab suspender extensions
+				if (tab.favIconUrl != undefined && tab.favIconUrl.match("data:image/png;base64") != null) {
+					$("#tab_header" + tab.id).css({ "background-image": "url(" + tab.favIconUrl + ")" });
+				} else {
+					// case for internal pages, favicons don't have access, but can be loaded from url
+					if (tab.url.match("opera://|vivaldi://|browser://|chrome://|chrome-extension://|about:") != null) {
 						$("#tab_header" + tab.id).css({ "background-image": "url(chrome://favicon/" + tab.url + ")" });
 					} else {
-						if (tab.favIconUrl != undefined && tab.favIconUrl != "") {
+						// change favicon
+						var img = new Image();
+						img.src = tab.favIconUrl;
+						img.onload = function() {
 							$("#tab_header" + tab.id).css({ "background-image": "url(" + tab.favIconUrl + ")" });
-						} else {
+						};
+						img.onerror = function() {
 							$("#tab_header" + tab.id).css({ "background-image": "url(chrome://favicon/" + tab.url + ")" });
 						}
 					}
+				}
 			}
 			if (tab && tab.status == "loading") {
 				$("#" + tabId).addClass("loading");

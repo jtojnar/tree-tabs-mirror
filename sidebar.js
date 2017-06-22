@@ -30,6 +30,13 @@ function Initialize(){
 
 		if (navigator.userAgent.match("Firefox") === null){
 			document.styleSheets[0].insertRule("::-webkit-scrollbar { width:"+theme.ScrollbarTabList+"px; height:"+theme.ScrollbarPinList+"px; }", 0);
+		} else {
+			// I have no idea what is going on in latest build, but why top position for various things is different in firefox?????
+			if (theme.TabsSizeSetNumber > 1){
+				document.styleSheets[1].insertRule(".tab_header>.tab_title { margin-top: -1.5px; }", document.styleSheets[1].cssRules.length);
+			}
+			// document.styleSheets[1].insertRule("#toolbar_main { top: 1px; height: 25px; }", document.styleSheets[1].cssRules.length);
+			// document.styleSheets[1].insertRule(".button_img { position: relative; top: -1px; left: -1px; }", document.styleSheets[1].cssRules.length);
 		}
 			
 		chrome.tabs.query({currentWindow: true}, function(tabs){
@@ -106,6 +113,8 @@ function Initialize(){
 					}
 				}
 			});
+			delete theme;
+
 			SetIOEvents();
 			SetToolbarEvents();
 			SetTRefreshEvents();
@@ -115,11 +124,15 @@ function Initialize(){
 			RefreshExpandStates();
 			UpdateData();
 			
+			// Scroll to active tab
+			setTimeout(function(){ ScrollToTab($(".active")[0].id); },100);
+			
+			
+			
 			if (navigator.userAgent.match("Vivaldi") !== null){
 				VivaldiRefreshMediaIcons();
 			}
 			
-			delete theme;
 		});
 	}
 

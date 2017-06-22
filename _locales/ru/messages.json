@@ -350,7 +350,7 @@
    "options_theme_tabs_sample_text_search_result": {
       "message": "Результат поиска"
    },
-   "options_theme_tabs_sample_text_search_result_higlighted": {
+   "options_theme_tabs_sample_text_search_result_highlighted": {
       "message": "Выделенный результат поиска"
    },
    "options_theme_tabs_sample_text_search_result_selected": {
@@ -427,5 +427,14 @@
    },
    "options_active_tab_font_bold": {
       "message": "жирный шрифт для активной вкладки"
+   },
+   "options_faster_scroll": {
+      "message": "Быстрая прокрутка"
+   },
+   "options_never_show_close": {
+      "message": "не показывать кнопку закрытия (опция выше будет проигнорирована)"
+   },
+   "tabs_menu_close_tree": {
+      "message": "Закрыть дерево"
    }
 }

@@ -63,6 +63,8 @@ function LoadTabs(retry){
 		
 		// will loop forever if session restore tab is found
 		if (navigator.userAgent.match("Firefox") !== null){
+			// "experiments.tabstrip" this goes in permissions in manifest, maybe in future it will be implemented
+			// browser.tabstrip.setTabsVisible(false);
 			var halt = false;
 			for (var t = 0; t < qtabs.length; t++){
 				if (qtabs[t].url.match("sessionrestore")){
